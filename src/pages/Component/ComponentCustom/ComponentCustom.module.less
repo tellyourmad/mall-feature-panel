@@ -1,0 +1,43 @@
+.componentCustom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  &__options {
+  }
+  &__middle {
+    position: relative;
+    border: 1px dashed #ddd;
+    padding: 10px;
+    background-color: #fff;
+    box-sizing: content-box;
+  }
+  &__plan {
+    background-color: #fff;
+  }
+  &__layer {
+    background-color: #fff;
+    height: 100%;
+    width: 200px;
+  }
+  .title {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 12px;
+    font-size: 14px;
+    color: #333333;
+    background-color: #f7f7f7;
+  }
+}
+
+.overlap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  &.touchable {
+    pointer-events: auto;
+  }
+}

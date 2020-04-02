@@ -1,0 +1,94 @@
+.app {
+  .logo {
+    color: #fff;
+    padding: 0;
+    text-align: center;
+  }
+  .main {
+    background-color: #f0f2f5;
+    .header {
+      background-color: #fff;
+    }
+    .content {
+    }
+  }
+}
+
+* {
+  //默认样式重置
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+p {
+  margin: 0;
+}
+
+html {
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto;
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+//使一些不认识h5新标签的内核也将这些标签表现为div
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+img {
+  max-width: 100% !important;
+  vertical-align: middle;
+}
+
+//清除移动端点击标签会出的小“阴影”
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+  -moz-outline-style: none;
+}
+*:active,
+*:hover {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
