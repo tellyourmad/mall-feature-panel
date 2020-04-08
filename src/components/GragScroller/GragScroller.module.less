@@ -1,0 +1,12 @@
+.gragScroller {
+  overflow: auto;
+  &.pressing {
+    cursor: grab;
+    * {
+      pointer-events: none !important;
+    }
+  }
+  &.grabbing {
+    cursor: grabbing;
+  }
+}

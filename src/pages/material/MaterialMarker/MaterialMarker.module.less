@@ -1,0 +1,50 @@
+.stick {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  max-height: 95%;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  overflow: auto;
+  > .tips {
+    text-align: center;
+  }
+}
+.materialMarker {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @leftWidth: 256px;
+  @rightWidth: 336px;
+
+  > .left {
+    .stick;
+    left: 0;
+    width: @leftWidth;
+    padding: 0 12px;
+  }
+
+  > .middle {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+    > div {
+      padding: 10px (@rightWidth + 50px) 50px (@leftWidth + 50px);
+      min-width: 100%;
+      box-sizing: border-box;
+      width: fit-content;
+    }
+  }
+
+  > .right {
+    .stick;
+    right: 20px;
+    width: @rightWidth;
+    padding: 0 12px 20px;
+  }
+}

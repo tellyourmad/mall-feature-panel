@@ -1,0 +1,29 @@
+.form {
+  .row {
+    margin-bottom: 8px;
+    :global(.ant-form-item-control-input-content) {
+      display: flex;
+      flex-direction: row;
+    }
+    input,
+    :global(.ant-select) {
+      max-width: 180px;
+    }
+  }
+  .inlineItem {
+    display: inline-block;
+    flex: 1;
+    max-width: 140px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    &:first-child {
+      margin-right: 10px;
+    }
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+  :global(.ant-form-text) {
+    align-self: center;
+  }
+}

@@ -1,0 +1,18 @@
+.resizableCanvas {
+  position: relative;
+  box-sizing: content-box;
+  padding-bottom: 32px;
+  > .area {
+    position: relative;
+    border: 1px solid #ddd;
+    box-sizing: content-box;
+    > .rnd {
+      transform: translate3d(0, 0, 0) !important;
+    }
+  }
+}
+.resizeHandle {
+  text-align: center;
+  height: 32px;
+  line-height: 32px;
+}

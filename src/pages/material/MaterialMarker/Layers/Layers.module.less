@@ -1,0 +1,49 @@
+.layers {
+  padding: 6px;
+  > .item {
+    padding: 0 6px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.65);
+    > .content {
+      flex: 1;
+      height: 34px;
+      line-height: 34px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        cursor: pointer;
+      }
+      > span {
+        margin-right: 8px;
+      }
+    }
+    > .btn {
+      flex: none;
+      visibility: hidden;
+      &:hover {
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+    &:hover {
+      > .btn {
+        visibility: visible;
+      }
+    }
+    &.selected {
+      background-color: #f1f1f5;
+    }
+  }
+}
+
+.empty {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 34px;
+  height: 34px;
+}

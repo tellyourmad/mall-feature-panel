@@ -1,25 +1,38 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined
-} from "@ant-design/icons";
+  Switch,
+  Route,
+  Redirect,
+  RouteComponentProps,
+  withRouter
+} from "react-router";
+import { NavLink } from "react-router-dom";
 
-import styles from "./App.module.scss";
+import styles from "./App.module.less";
+import menus from "./config/menu";
+import routes from "./config/routes";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-class App extends React.Component {
+class App extends React.Component<RouteComponentProps> {
   state = {
     collapsed: false
   };
 
+  static childContextTypes = {
+    menuCollapse: PropTypes.func
+  };
+
+  getChildContext() {
+    return {
+      menuCollapse: this.onCollapse.bind(this)
+    };
+  }
+
   onCollapse = (collapsed: boolean) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
 
@@ -29,69 +42,82 @@ class App extends React.Component {
         <Sider
           collapsible
           collapsed={this.state.collapsed}
-          onCollapse={this.onCollapse}
+          onCollapse={this.onCollapse.bind(this)}
         >
           <Header className={styles.logo}>运营中心</Header>
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1">
-              <PieChartOutlined />
-              <span>Option 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <DesktopOutlined />
-              <span>Option 2</span>
-            </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <UserOutlined />
-                  <span>User</span>
-                </span>
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={[this.props.location.pathname]}
+            mode="inline"
+          >
+            {menus.map((outer, n: number) => {
+              if (typeof outer.children === "undefined") {
+                return (
+                  <Menu.Item key={outer.path || n}>
+                    {outer.path ? (
+                      <NavLink to={outer.path}>{outer.title}</NavLink>
+                    ) : (
+                      <span>{outer.title}</span>
+                    )}
+                  </Menu.Item>
+                );
+              } else {
+                return (
+                  <SubMenu
+                    key={n}
+                    title={
+                      <span>
+                        <span>{outer.title}</span>
+                      </span>
+                    }
+                  >
+                    {outer.children.map((inner, m: number) => (
+                      <Menu.Item key={inner.path || m}>
+                        {inner.path ? (
+                          <NavLink to={inner.path}>{inner.title}</NavLink>
+                        ) : (
+                          <span>{inner.title}</span>
+                        )}
+                      </Menu.Item>
+                    ))}
+                  </SubMenu>
+                );
               }
-            >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <TeamOutlined />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
-              <FileOutlined />
-            </Menu.Item>
+            })}
           </Menu>
         </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
+        <Layout className={styles.main}>
+          <Header className={styles.header} style={{ padding: 0 }}>
+            <Breadcrumb style={{ margin: 16 }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            <div
-              className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
-            >
-              Bill is a cat.
+          </Header>
+          <Content className={styles.content}>
+            <div>
+              <Switch>
+                <Route>
+                  {routes.map(function({ redirect, component, ...props }, k) {
+                    if (redirect) {
+                      return (
+                        <Route
+                          key={k}
+                          {...props}
+                          render={() => <Redirect to={redirect} />}
+                        />
+                      );
+                    } else {
+                      return <Route key={k} {...props} component={component} />;
+                    }
+                  })}
+                </Route>
+              </Switch>
             </div>
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
         </Layout>
       </Layout>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
