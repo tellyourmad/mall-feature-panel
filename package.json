@@ -9,7 +9,7 @@
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "rc-color-picker": "^1.2.6",
     "react": "^16.13.0",
     "react-beautiful-dnd": "^13.0.0",
